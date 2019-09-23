@@ -63,6 +63,14 @@ class CoinpaprikaAPI {
     })
   }
 
+  getAllTickers (params = {}) {
+    return createRequest({
+      fetcher: this.fetcher,
+      url: `${this.url}/tickers/`,
+      config: this.config
+    })
+  }
+
   /**
    * Get a list of all cryptocurrencies available on coinpaprika.com.
    *

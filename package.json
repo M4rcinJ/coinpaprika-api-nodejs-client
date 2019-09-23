@@ -20,11 +20,7 @@
     "pretest": "npm run lint"
   },
   "jest": {
-    "verbose": true,
-    "setupFilesAfterEnv": [
-      "jest-chain",
-      "jest-extended"
-    ]
+    "verbose": true
   },
   "author": "coinpaprika.com",
   "devDependencies": {

@@ -2,9 +2,8 @@ const CoinpaprikaAPI = require('../index')
 
 const isObject = obj => Object.prototype.toString.call(obj) === '[object Object]'
 
-describe('getAllTickers', () => {
+describe('getCoins', () => {
   let client = null
-
   beforeEach(() => {
     client = new CoinpaprikaAPI()
   })
@@ -15,14 +14,15 @@ describe('getAllTickers', () => {
   })
 
   it('returns array of objects consistent with API documentation', async () => {
-    const response = await client.getAllTickers()
+    const response = await client.getCoins()
     expect(Array.isArray(response)).toBeTruthy()
-    const expectedProperties = ['id', 'name', 'rank', 'symbol', 'circulating_supply', 'total_supply', 'max_supply', 'beta_value', 'last_updated', 'quotes']
 
-    response.forEach(item => {
-      expect(isObject(item)).toBeTruthy()
+    const expectedProperties = ['id', 'name', 'symbol', 'rank', 'is_new', 'is_active', 'type']
+
+    response.forEach(coin => {
+      expect(isObject(coin)).toBeTruthy()
       expectedProperties.forEach(property => {
-        expect(item.hasOwnProperty(property)).toBeTruthy()
+        expect(coin.hasOwnProperty(property)).toBeTruthy()
       })
     })
   })
