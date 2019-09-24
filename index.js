@@ -55,6 +55,10 @@ class CoinpaprikaAPI {
    * client.getTicker().then(console.log).catch(console.error)
    */
   getTicker (args = {}) {
+    if (Object.prototype.toString.call(args) !== '[object Object]') {
+      throw Error('Please pass object as arg.')
+    }
+
     let { coinId } = args
     return createRequest({
       fetcher: this.fetcher,

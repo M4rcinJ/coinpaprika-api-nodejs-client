@@ -51,4 +51,11 @@ describe('getAllTickers', () => {
     expect(response.symbol).toMatch('BTC')
     expect(response.price_btc).toMatch('1')
   })
+
+  it('throws when object is not passed as arg', () => {
+    const payload = 'something'
+    expect(() => {
+      client.getTicker(payload)
+    }).toThrowError('Please pass object as arg.')
+  })
 })
