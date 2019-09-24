@@ -64,9 +64,37 @@ class CoinpaprikaAPI {
   }
 
   getAllTickers (params = {}) {
+    if (Object.prototype.toString.call(params) !== '[object Object]') {
+      throw Error('Please pass object as arg.')
+    }
+
+    const { coinId, quotes, historical } = params
+
+    if ((historical && typeof coinId === 'undefined') || (coinId && historical && typeof historical.start === 'undefined')) {
+      throw Error('required param was not pass, please check CoinpaprikaAPI client usage')
+    }
+
+    const coinIdParam = coinId ? `/${coinId}` : ''
+    const quotesParam = quotes ? `?quotes=${quotes.join(',')}` : ''
+    let historicalParam = ''
+    if (historical && coinId) {
+      historicalParam = ((historicalArgs = {}) => {
+        const { start, end, limit, quote, interval } = historicalArgs
+        const startParam = `start=${start}`
+        const endParam = end ? `&end=${end}` : ''
+        const limitParam = limit ? `&limit=${limit}` : ''
+        const quoteParam = quote ? `&quote=${quote}` : ''
+        const intervalParam = interval ? `&interval=${interval}` : ''
+
+        return `/historical?${startParam}${endParam}${limitParam}${quoteParam}${intervalParam}`
+      })(historical)
+    }
+
+    const query = `${coinIdParam}${historicalParam}${quotesParam}`
+
     return createRequest({
       fetcher: this.fetcher,
-      url: `${this.url}/tickers/`,
+      url: `${this.url}/tickers/${query}`,
       config: this.config
     })
   }

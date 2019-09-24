@@ -1,7 +1,7 @@
 const CoinpaprikaAPI = require('../index')
 
 describe('CoinpaprikaAPI class', () => {
-  let cient = null
+  let client = null
 
   beforeEach(() => {
     client = new CoinpaprikaAPI()
