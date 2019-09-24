@@ -14,7 +14,7 @@ describe('getAllTickers', () => {
     expect(response instanceof Promise).toBe(true)
   })
 
-  it('returns array of objects consistent with API documentation', async () => {
+  it('returns array of objects consistent to API documentation', async () => {
     const response = await client.getAllTickers()
     expect(Array.isArray(response)).toBeTruthy()
     const expectedProperties = ['id', 'name', 'rank', 'symbol', 'circulating_supply', 'total_supply', 'max_supply', 'beta_value', 'last_updated', 'quotes']

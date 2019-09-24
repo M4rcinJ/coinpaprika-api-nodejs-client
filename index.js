@@ -45,9 +45,9 @@ class CoinpaprikaAPI {
 
   /**
    * Get information on all tickers or specifed ticker.
+   * DEPRECATED
    *
    * @param {Object=} options Options for the request
-   * @param {String=} [options.coinId="all"] Type of cryptocurrency to include ("all" | "coins" | "tokens")
    *
    * @example
    * const client = new CoinpaprikaAPI()
@@ -67,6 +67,34 @@ class CoinpaprikaAPI {
     })
   }
 
+  /**
+   * Get tickers for all coins
+   * @param {Object=} options for the request consistent to https://api.coinpaprika.com/#tag/Tickers
+   * @param coinId: string
+   * @param quotes: array of strings
+   * @param historical: object
+   * @example
+   * const client = new CoinpaprikaAPI()
+   * client.getAllTickers({
+   *     coinId:'btc-bitcoin',
+   *     quotes: ['BTC', 'ETH']
+   * })
+   * .then(console.log)
+   * .catch(console.error)
+   *
+   * client.getAllTickers({
+   *     coinId:'btc-bitcoin',
+   *     historical: {
+   *         start: '2018-02-15',
+   *         end: '2018-02-16',
+   *         limit: 2000,
+   *         quote: 'btc',
+   *         interval: '30m'
+   *     }
+   * })
+   * .then(console.log)
+   * .catch(console.error)
+   */
   getAllTickers (params = {}) {
     if (Object.prototype.toString.call(params) !== '[object Object]') {
       throw Error('Please pass object as arg.')
