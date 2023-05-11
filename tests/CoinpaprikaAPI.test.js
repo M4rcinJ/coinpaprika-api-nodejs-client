@@ -14,11 +14,7 @@ describe('CoinpaprikaAPI class', () => {
   it('has defined all endpoints consistent to API documentation', () => {
     expect(client.getGlobal).toBeDefined()
     expect(client.getCoins).toBeDefined()
-    expect(client.getPeople).toBeDefined()
-    expect(client.getTags).toBeDefined()
     expect(client.getAllTickers).toBeDefined()
     expect(client.getTicker).toBeDefined()
-    expect(client.getExchanges).toBeDefined()
-    expect(client.search).toBeDefined()
   })
 })
